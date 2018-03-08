@@ -26,10 +26,10 @@ class DB_Functions
      */
     public function storeUser($nome, $cognome, $email, $password)
     {
-        $db_password = password_hash($passwordm, PASSWORD_BCRYPT); // encrypted password
+        $db_password = password_hash($password, PASSWORD_BCRYPT); // encrypted password
  
         // prepare and execute statement to insert new user in DB
-        $stmt = $this->conn->prepare("INSERT INTO users(nome, cognome, email, password, data_creazione) VALUES(?, ?, ?, ?, NOW())");
+        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $nome, $cognome, $email, $db_password);
         $result = $stmt->execute();
         $stmt->close();
@@ -37,7 +37,7 @@ class DB_Functions
         // check for successful store
         if ($result)
         {
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+            $stmt = $this->conn->prepare("SELECT * FROM utenti WHERE email = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
@@ -84,7 +84,7 @@ class DB_Functions
      */
     public function emailAlreadyUsed($email)
     {
-        $stmt = $this->conn->prepare("SELECT email from users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT email from utenti WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
