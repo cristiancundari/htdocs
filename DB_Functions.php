@@ -29,7 +29,7 @@ class DB_Functions
         $db_password = password_hash($password, PASSWORD_BCRYPT); // encrypted password
  
         // prepare and execute statement to insert new user in DB
-        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password) VALUES (?, ?, ?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password) VALUES(?, ?, ?, ?)");
         $stmt->bind_param("ssss", $nome, $cognome, $email, $db_password);
         $result = $stmt->execute();
         $stmt->close();

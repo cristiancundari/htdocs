@@ -12,18 +12,21 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        if (emailIsAlredyInUse($email))
+        if ($db->emailAlreadyUsed($email))
         {
             $response["error"] = true;
             $response["error_msg"] = "L'email inserita è già in uso, riprova.";
         }
         else
         {
-            $user = storeUser($nome, $cognome, $email, $password);
+            $user = $db->storeUser($nome, $cognome, $email, $password);
             if ($user)
-            {
                 $response["user"] = $user;
+            else{
+                $response["error"] = true;
+                $response["error_msg"] = "Si è verificato un errore imprevisto durante l'inserimento del nuovo utente";
             }
+
         }
 
         
