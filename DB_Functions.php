@@ -24,21 +24,21 @@ class DB_Functions
      * Storing new user
      * returns user details
      */
-    public function storeUser($nome, $cognome, $username, $password)
+    public function storeUser($nome, $cognome, $email, $password)
     {
         $db_password = password_hash($passwordm, PASSWORD_BCRYPT); // encrypted password
  
         // prepare and execute statement to insert new user in DB
-        $stmt = $this->conn->prepare("INSERT INTO users(nome, cognome, username, password, data_creazione) VALUES(?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssss", $nome, $cognome, $username, $db_password);
+        $stmt = $this->conn->prepare("INSERT INTO users(nome, cognome, email, password, data_creazione) VALUES(?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssss", $nome, $cognome, $email, $db_password);
         $result = $stmt->execute();
         $stmt->close();
  
         // check for successful store
         if ($result)
         {
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = ?");
-            $stmt->bind_param("s", $username);
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
             $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
             $stmt->close();
@@ -50,14 +50,14 @@ class DB_Functions
     }
  
     /*
-     * Get user by username and password
+     * Get user by email and password
      */
-    public function getUserByUsernameAndPassword($username, $password)
+    public function getUserByEmailAndPassword($email, $password)
     {
         // Prepare statement
-        $stmt = $this->conn->prepare("SELECT * FROM utenti WHERE username = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM utenti WHERE email = ?");
  
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("s", $email);
         
         // Try to execute prepered statement
         if ($stmt->execute()) 
@@ -80,19 +80,19 @@ class DB_Functions
     }
  
     /*
-     * Check if username is already in use by another user
+     * Check if email is already in use by another user
      */
-    public function usernameAlreadyUsed($username)
+    public function emailAlreadyUsed($email)
     {
-        $stmt = $this->conn->prepare("SELECT username from users WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        $stmt = $this->conn->prepare("SELECT email from users WHERE email = ?");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         $num_rows = $stmt->num_rows;
         $stmt->close();
 
-        return ($num_rows > 0); // return true if username exist, false otherwise
+        return ($num_rows > 0); // return true if email exist, false otherwise
     }
 }
     
