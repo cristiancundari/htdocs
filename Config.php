@@ -11,6 +11,11 @@
      * LINK: https://www.freemysqlhosting.net/login/
      * email: ficitaroj@emailsy.info
      * passw: pippofranco123
+     * 
+     * ------------------------------------------------
+     * ACCEDERE A PHPMYADMIN
+     * LINK http://www.phpmyadmin.co/
+     * CREDENZIALI (vedi sotto)
      */
     define("DB_HOST", "sql11.freemysqlhosting.net");
     define("DB_USER", "sql11225565");

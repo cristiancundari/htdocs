@@ -3,7 +3,7 @@
 class DB_Functions
 {
  
-    private $conn;
+    public $conn;
  
     // constructor
     function __construct()
