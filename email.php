@@ -1,10 +1,10 @@
 <?php
 
-    /*if(isset($_POST["email"]) && isset($_POST["nome"]) && isset($_POST["codice"]))
-    {*/
-        $email = "emanuelefurnari@outlook.com";//$_POST["email"];
-        $nome = "Emanuele";//$_POST["nome"];
-        $codice = "pippo";//$_POST["codice"];
+    if(isset($_POST["email"]) && isset($_POST["nome"]) && isset($_POST["codice"]))
+    {
+        $email = $_POST["email"];
+        $nome = $_POST["nome"];
+        $codice = $_POST["codice"];
 
         $to = $email;
 
@@ -25,5 +25,5 @@
             echo "Email inviata con successo";
         else
             echo "Errore durante l'invio dell'email";
-    //}
+    }
 ?>

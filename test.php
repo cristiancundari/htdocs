@@ -1,3 +1,4 @@
 <?php
-echo $_SERVER['SERVER_NAME'];
+$data = date("Y-m-d");
+echo $data;
 ?>

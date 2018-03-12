@@ -17,12 +17,12 @@
      * ACCEDERE A PHPMYADMIN
      * LINK http://www.phpmyadmin.co/
      * CREDENZIALI (vedi sotto)
-     * 
-     * define("DB_HOST", "sql11.freemysqlhosting.net");
-     * define("DB_USER", "sql11225565");
-     * define("DB_PASSWORD", "k1iCPhL1jU");
-     * define("DB_DATABASE", "sql11225565");
-     * 
+     */
+     define("DB_HOST", "sql11.freemysqlhosting.net");
+     define("DB_USER", "sql11225565");
+     define("DB_PASSWORD", "k1iCPhL1jU");
+     define("DB_DATABASE", "sql11225565");
+     /* 
      * ---------------------------------------------------
      * 
      * LINK: https://www.heliohost.org/
@@ -30,10 +30,11 @@
      * passw: pippo123
      * 
      * ---------------------------------------------------
+     *
+     * define("DB_HOST", "ccundari.heliohost.org");
+     * define("DB_USER", "ccundari_android");
+     * define("DB_PASSWORD", "yl9sX9ZXseJb");
+     * define("DB_DATABASE", "ccundari_birdbase");
      */
-    define("DB_HOST", "ccundari.heliohost.org");
-    define("DB_USER", "ccundari_android");
-    define("DB_PASSWORD", "yl9sX9ZXseJb");
-    define("DB_DATABASE", "ccundari_birdbase");
 
 ?>

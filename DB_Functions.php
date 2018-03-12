@@ -27,10 +27,12 @@ class DB_Functions
     public function storeUser($nome, $cognome, $email, $password)
     {
         $db_password = password_hash($password, PASSWORD_BCRYPT); // encrypted password
- 
+        $codice = substr(md5(uniqid("")),8,6);
+        $data = date("Y-m-d");
+
         // prepare and execute statement to insert new user in DB
-        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password) VALUES(?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $nome, $cognome, $email, $db_password);
+        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password, codice_conferma, data_registrazione) VALUES(?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $nome, $cognome, $email, $db_password, $codice, $data);
         $result = $stmt->execute();
         $stmt->close();
  
