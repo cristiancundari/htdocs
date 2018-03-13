@@ -133,6 +133,26 @@ class DB_Functions
         else
             return 1;
     }
+
+    public function cambiaPassword($email, $password)
+    {
+        $db_password = password_hash($password, PASSWORD_BCRYPT); // encrypted password
+
+        // Prepare statement
+        $stmt = $this->conn->prepare("UPDATE utenti SET password = ? WHERE email = ?");
+ 
+        $stmt->bind_param("ss", $db_password, $email);
+        
+        // Try to execute prepered statement
+        if ($stmt->execute()) 
+        {
+            $result = $stmt->affected_rows;
+            $stmt->close();
+            return $result > 0;
+        }
+        else
+            return null;
+    }
 }
     
 ?>

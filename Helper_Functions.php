@@ -30,6 +30,29 @@ class Helper_Functions
 
         return $result;
     }
+
+
+
+    public function sendEmailRecupero($email, $codice)
+    {
+        // Subject
+        $subject = 'Birdbase recupero password';
+
+        // Message
+        $message = $codice;
+
+        // To send HTML mail, the Content-type header must be set
+        $headers[] = 'MIME-Version: 1.0';
+        $headers[] = 'Content-type: text/html; charset=iso-8859-1';
+
+        // Mail it
+        $result = mail($email, $subject, $message, implode("\r\n", $headers));
+
+        return $result;
+    }
+
+
+
 }
 
 ?>
