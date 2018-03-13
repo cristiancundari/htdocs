@@ -29,7 +29,6 @@
                 $response["error"] = true;
                 $response["error_msg"] = "Nessun record corrisponde ai criteri di ricerca";
             }
-            
         }
         else
         {

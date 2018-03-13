@@ -21,21 +21,27 @@
         {
             $user = $db->storeUser($nome, $cognome, $email, $password);
             if ($user)
+            {
+                require_once "Helper_Functions.php";
+                $helper = new Helper_Functions();
+
                 $response["user"] = $user;
-            else{
+
+                $result = $helper->sendEmail($user["email"], $user["nome"], $user["codice_conferma"]);
+                $response["email"] = $result;
+            }
+            else
+            {
                 $response["error"] = true;
                 $response["error_msg"] = "Si è verificato un errore imprevisto durante l'inserimento del nuovo utente";
             }
 
         }
-
-        
-
     } 
     else
     {
         $response["error"] = true;
-        $response["error_msg"] = "Dati richiesti mancanti";
+        $response["error_msg"] = "I parametri richiesti sono obbligatori";
     }
 
     echo json_encode($response);

@@ -96,6 +96,43 @@ class DB_Functions
 
         return ($num_rows > 0); // return true if email exist, false otherwise
     }
+
+    public function accountVerification($email, $codice)
+    {
+        // Prepare statement
+        $stmt = $this->conn->prepare("SELECT * FROM utenti WHERE email = ? AND codice_conferma = ?");
+ 
+        $stmt->bind_param("ss", $email, $codice);
+        
+        // Try to execute prepered statement
+        if ($stmt->execute()) 
+        {
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+ 
+            // get verified variable from db
+            $verificato = $user['verificato'];
+            
+            // check if it's already verified
+            if (!$verificato)
+            {
+                // Prepare statement
+                $stmt = $this->conn->prepare("UPDATE utenti SET verificato = 1 WHERE id = ?");
+
+                $stmt->bind_param("i", $user["id"]);
+
+                // Try to execute prepered statement
+                if ($stmt->execute()) 
+                    return 0;
+                else
+                    return 1;
+            }
+            else
+                return 2;
+        }
+        else
+            return 1;
+    }
 }
     
 ?>
