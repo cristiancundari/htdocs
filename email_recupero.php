@@ -7,7 +7,7 @@
     if(isset($_POST["email"]))
     {
         $email = $_POST["email"];
-        $codice = substr(md5(uniqid("")),8,6);
+        $codice = strtoupper(substr(md5(uniqid("")),8,6));
 
         // Mail it
         $result = $helper->sendEmailRecupero($email, $codice);
