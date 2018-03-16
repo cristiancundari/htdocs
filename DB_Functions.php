@@ -117,9 +117,9 @@ class DB_Functions
             if (!$verificato)
             {
                 // Prepare statement
-                $stmt = $this->conn->prepare("UPDATE utenti SET verificato = 1 WHERE id = ?");
+                $stmt = $this->conn->prepare("UPDATE utenti SET verificato = 1 WHERE id_utente = ?");
 
-                $stmt->bind_param("i", $user["id"]);
+                $stmt->bind_param("i", $user["id_utente"]);
 
                 // Try to execute prepered statement
                 if ($stmt->execute()) 

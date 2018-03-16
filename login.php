@@ -18,7 +18,7 @@
         // check if user was found or not
         if ($user != false) {
             // user is found
-            $response["user"]["id"] = $user["id"];
+            $response["user"]["id_utente"] = $user["id_utente"];
             $response["user"]["nome"] = $user["nome"];
             $response["user"]["cognome"] = $user["cognome"];
             $response["user"]["email"] = $user["email"];
