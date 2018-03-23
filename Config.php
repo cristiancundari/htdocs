@@ -2,12 +2,12 @@
 
     /**
      * Database config variables
-     * 
-     * define("DB_HOST", "localhost");
-     * define("DB_USER", "android_app_user");
-     * define("DB_PASSWORD", "W25Af4o8OPV4bZwH");
-     * define("DB_DATABASE", "birdbase");
-     * 
+     */ 
+     define("DB_HOST", "localhost");
+     define("DB_USER", "android_app_user");
+     define("DB_PASSWORD", "W25Af4o8OPV4bZwH");
+     define("DB_DATABASE", "ccundar2_birdbase");
+     /* 
      * ---------------------------------------------------
      * 
      * LINK: https://www.freemysqlhosting.net/login/
@@ -29,10 +29,10 @@
      * passw: pippo123
      * 
      * ---------------------------------------------------
-     */
+     
     define("DB_HOST", "ccundar2.heliohost.org");
     define("DB_USER", "ccundar2_android");
     define("DB_PASSWORD", "yl9sX9ZXseJb");
     define("DB_DATABASE", "ccundar2_birdbase");
-
+*/
 ?>
