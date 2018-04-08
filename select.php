@@ -17,9 +17,17 @@
             $stmt->bind_param($_POST["param_type"], ...$params);
 
         // Try to execute prepered statement
-        if ($stmt->execute()) 
+        if ($stmt->execute())
         {
-            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);;
+            $hasResult = $stmt->get_result();
+            if ($hasResult)
+            {
+                $result = $hasResult->fetch_all(MYSQLI_ASSOC);
+            }
+            else
+            {
+                $result = true;
+            }
             $stmt->close();
 
             if($result)
