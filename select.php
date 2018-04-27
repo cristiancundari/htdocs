@@ -27,11 +27,14 @@
             else
             {
                 $result = true;
+                $response["id"] = $db->conn->insert_id;
             }
             $stmt->close();
 
             if($result)
+            {
                 $response["result"] = $result;
+            }
             else
             {
                 $response["error"] = true;
