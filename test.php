@@ -13,7 +13,7 @@
         $param_types = json_decode($_POST["param_type"]);
         $params = json_decode($_POST["params"]);
 
-        $transaction = isset($_POST["transaction"]) ? $_POST["transaction"] : false;
+        $transaction = isset($_POST["transaction"]) ? json_decode($_POST["transaction"])[0] : false;
 
         if ($transaction === true)
             $db->conn->begin_transaction();
