@@ -46,18 +46,11 @@
                         $response["queries"][$i]["id"] = $db->conn->insert_id;
                     }
                     $stmt->close();
+                    unset($stmt);
 
-                    if($result)
-                    {
-                        $err = false;
-                        $response["queries"][$i]["error"] = false;
-                        $response["queries"][$i]["result"] = $result;
-                    }
-                    else
-                    {
-                        $response["queries"][$i]["error"] = true;
-                        $response["queries"][$i]["error_msg"] = "Nessun record corrisponde ai criteri di ricerca";
-                    }
+                    $err = false;
+                    $response["queries"][$i]["error"] = false;
+                    $response["queries"][$i]["result"] = $result;
                 }
                 else
                 {
@@ -67,6 +60,8 @@
             }
 
             $error = $error || $err;
+
+
         }
 
         if ($transaction === true) {
@@ -85,6 +80,8 @@
     }
 
     $db->conn->close();
+    unset($db->conn);
+    unset($db);
 
     echo json_encode($response);
 ?>
