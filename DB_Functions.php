@@ -31,8 +31,8 @@ class DB_Functions
         $data = date("Y-m-d");
 
         // prepare and execute statement to insert new user in DB
-        $stmt = $this->conn->prepare("INSERT INTO utenti(nome, cognome, email, password, codice_conferma, data_registrazione) VALUES(?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $nome, $cognome, $email, $db_password, $codice, $data);
+        $stmt = $this->conn->prepare("INSERT INTO utenti(email, password, codice_conferma, data_registrazione, verificato) VALUES(?, ?, ?, ?, 0)");
+        $stmt->bind_param("ssss", $email, $db_password, $codice, $data);
         $result = $stmt->execute();
         $stmt->close();
  

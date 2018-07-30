@@ -1,7 +1,7 @@
 <?php
 
-    if(isset($_GET["operazione"])) {
-        $op = $_GET["operazione"];
+    if(isset($_POST["operazione"])) {
+        $op = $_POST["operazione"];
 
         // json response array
         $response = array("error" => false);
@@ -10,7 +10,7 @@
         $db = new DB_Functions();
 
         switch ($op) {
-            case 'login':
+            case "login":
                 login();
                 break;
             case 'registrazione':
@@ -105,14 +105,14 @@
     function verifica() {
         global $response;
 
-        if (isset($_GET['e']) && isset($_GET['c'])) 
+        if (isset($_POST['email']) && isset($_POST['codice'])) 
         {
-            $email = $_GET["e"];
-            $codice = $_GET["c"];
+            $email = $_POST["email"];
+            $codice = $_POST["codice"];
 
             $result = accountVerification($email, $codice);
 
-            if ($result == 1) {
+            if ($result == false) {
                 $response["error"] = true;
                 $response["error_msg"] = "Questo account non può essere verificato.";
             }
@@ -250,7 +250,7 @@
         $data = date("Y-m-d");
 
         // prepare and execute statement to insert new user in DB
-        $stmt = $db->conn->prepare("INSERT INTO utenti(email, password, codice_conferma, data_registrazione) VALUES(?, ?, ?, ?)");
+        $stmt = $db->conn->prepare("INSERT INTO utenti(email, password, codice_conferma, data_registrazione, verificato) VALUES(?, ?, ?, ?, 0)");
         $stmt->bind_param("ssss", $email, $db_password, $codice, $data);
         $result = $stmt->execute();
         $stmt->close();
@@ -277,10 +277,10 @@
         $stmt->bind_param("sss", $new_codice, $email, $codice);
 
         // Try to execute prepered statement
-        if ($stmt->execute()) 
-            return 0;
+        if ($stmt->execute())
+            return $stmt->affected_rows == 1;
             
-        return 1;
+        return false;
     }
 
     function changePassword($email, $password, $codice) {
