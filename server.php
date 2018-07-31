@@ -321,7 +321,7 @@
     }
 
     function genera_codice() {
-        return substr(md5(uniqid("")),8,6);
+        return strtoupper(substr(md5(uniqid("")),8,6));
     }
 
 ?>
