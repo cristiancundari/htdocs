@@ -6,9 +6,14 @@
         // Connecting to database
         public function connect() {
             require_once 'Config.php';
-             
+            
             // Connecting to mysql database
             $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+            // Disabilita i warning del server apache
+            error_reporting(0);
+
+            mysqli_set_charset($this->conn, 'utf8');
              
             // return database handler
             return $this->conn;

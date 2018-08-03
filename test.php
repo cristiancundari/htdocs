@@ -30,10 +30,10 @@
                 $paramsi = $params[$i];
         
                 if(count($paramsi))
-                    $stmt->bind_param($param_types[$i], ...$paramsi);
+                    $bind = $stmt->bind_param($param_types[$i], ...$paramsi);
 
                 // Try to execute prepered statement
-                if ($stmt->execute())
+                if ($bind && $stmt->execute())
                 {
                     $hasResult = $stmt->get_result();
                     if ($hasResult)
@@ -55,7 +55,8 @@
                 else
                 {
                     $response["queries"][$i]["error"] = true;
-                    $response["queries"][$i]["error_msg"] = "Si è verificato un errore imprevisto, riprova.";
+                    $response["queries"][$i]["error_msg"] = "Si è verificato un errore imprevisto: " . $stmt->error;;
+                    $response["error_msg"] = $response["queries"][$i]["error_msg"];
                 }
             }
 
@@ -72,8 +73,6 @@
         }
 
         $response["error"] = $error;
-        if ($error) $response["error_msg"] = "Si è verificato un errore imprevisto, riprova.";
-
     } else {
         $response["error"] = true;
         $response["error_msg"] = "I parametri richiesti sono obbligatori";
@@ -83,5 +82,6 @@
     unset($db->conn);
     unset($db);
 
-    echo json_encode($response);
+    $stampa = json_encode($response);
+    echo $stampa;
 ?>
