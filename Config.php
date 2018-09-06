@@ -38,6 +38,6 @@
     define("DB_HOST", "ccundar2.heliohost.org");
     define("DB_USER", "ccundar2_android");
     define("DB_PASSWORD", "yl9sX9ZXseJb");
-    define("DB_DATABASE", "ccundar2_birdbase");
+    define("DB_DATABASE", "ccundar2_birdbase_v2");
 */
 ?>

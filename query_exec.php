@@ -29,6 +29,7 @@
 
                 $paramsi = $params[$i];
         
+                $bind = true;
                 if(count($paramsi))
                     $bind = $stmt->bind_param($param_types[$i], ...$paramsi);
 
@@ -58,6 +59,10 @@
                     $response["queries"][$i]["error_msg"] = "Si è verificato un errore imprevisto: " . $stmt->error;;
                     $response["error_msg"] = $response["queries"][$i]["error_msg"];
                 }
+            } else {
+                $response["queries"][$i]["error"] = true;
+                $response["queries"][$i]["error_msg"] = "La query non è andata a buon fine: " . mysqli_error($db->conn);
+                $response["error_msg"] = $response["queries"][$i]["error_msg"];
             }
 
             $error = $error || $err;
